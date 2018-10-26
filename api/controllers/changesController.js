@@ -10,7 +10,8 @@ exports.send = function(req, res) {
   
   connection.connect();
   
-  connection.query('SELECT * FOM Changes', function(err, rows, fields) {
+  connection.query('SELECT * FOM kasmzcclpa4gw80o.Changes', function(err, rows, fields) {
+    console.log('Returning some data...');
     if (err) throw err;
   
     console.log('The solution is: ', rows);
