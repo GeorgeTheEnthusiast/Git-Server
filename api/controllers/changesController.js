@@ -3,17 +3,35 @@
 exports.send = function(req, res) {
   console.log('SEND');
   console.log(req.body);
-  var fs = require('fs');
+
+  var SparkPost = require('sparkpost');
+  var sparky = new SparkPost(); // uses process.env.SPARKPOST_API_KEY
+  
+  sparky.transmissions.send({
+      options: {
+        sandbox: true
+      },
+      content: {
+        from: 'testing@' + process.env.SPARKPOST_SANDBOX_DOMAIN, // 'testing@sparkpostbox.com'
+        subject: 'Oh hey!',
+        html:'<html><body><p>Testing SparkPost - the world\'s most awesomest email service!</p></body></html>'
+      },
+      recipients: [
+        {address: 'warmemotions@gmail.com'}
+      ]
+    })
+    .then(data => {
+      console.log('Woohoo! You just sent your first mailing!');
+      console.log(data);
+    })
+    .catch(err => {
+      console.log('Whoops! Something went wrong');
+      console.log(err);
+    });
 
     req.body.GitChanges.forEach(x => {
         
-        fs.writeFile(x.FileName, x.Content, function(err) {
-            if(err) {
-                return console.log(err);
-            }
-
-            console.log("The file was saved to " + x.FileName);
-        }); 
+      
     });
 
   res.json('OK - send');
