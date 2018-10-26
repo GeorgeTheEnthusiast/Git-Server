@@ -12,8 +12,8 @@ exports.send = function(req, res) {
       sandbox: true
     },
     content: {
-      from: 'testing@' + process.env.SPARKPOST_SANDBOX_DOMAIN, // 'testing@sparkpostbox.com'
-      //from: 'warmemotions@gmail.com',
+      //from: 'testing@' + process.env.SPARKPOST_SANDBOX_DOMAIN, // 'testing@sparkpostbox.com'
+      from: 'warmemotions@gmail.com',
       subject: 'New files from Git repo',
       html:`Sending ${req.body.GitChanges.length} files...`,
       attachments:[]
