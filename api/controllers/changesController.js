@@ -7,19 +7,31 @@ exports.send = function(req, res) {
   var SparkPost = require('sparkpost');
   var sparky = new SparkPost(); // uses process.env.SPARKPOST_API_KEY
   
-  sparky.transmissions.send({
-      options: {
-        sandbox: true
-      },
-      content: {
-        from: 'testing@' + process.env.SPARKPOST_SANDBOX_DOMAIN, // 'testing@sparkpostbox.com'
-        subject: 'Oh hey!',
-        html:'<html><body><p>Testing SparkPost - the world\'s most awesomest email service!</p></body></html>'
-      },
-      recipients: [
-        {address: 'warmemotions@gmail.com'}
-      ]
-    })
+  var transmission = {
+    options: {
+      sandbox: true
+    },
+    content: {
+      //from: 'testing@' + process.env.SPARKPOST_SANDBOX_DOMAIN, // 'testing@sparkpostbox.com'
+      from: 'warmemotions@gmail.com',
+      subject: 'New files from Git repo',
+      html:`Sending ${req.body.GitChanges.length} files...`,
+      attachments:[]
+    },
+    recipients: [
+      {address: 'warmemotions@gmail.com'}
+    ]
+  };
+
+  req.body.GitChanges.forEach(x => {
+    transmission.content.attachments.push({
+        type:'application/octet-stream',
+        name:x.FileName,
+        data:x.Base64Content
+    });
+  });
+
+  sparky.transmissions.send(transmission)
     .then(data => {
       console.log('Woohoo! You just sent your first mailing!');
       console.log(data);
@@ -29,10 +41,7 @@ exports.send = function(req, res) {
       console.log(err);
     });
 
-    req.body.GitChanges.forEach(x => {
-        
-      
-    });
+    
 
   res.json('OK - send');
 };
