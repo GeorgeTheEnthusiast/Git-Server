@@ -6,10 +6,11 @@ exports.send = function(req, res) {
 
   
   var mysql = require('mysql');
+  console.log('Creating connection... ' + process.env.JAWSDB_URL);
   var connection = mysql.createConnection(process.env.JAWSDB_URL);
-  
+  console.log('Connecting...');
   connection.connect();
-  
+  console.log('Queyring...');
   connection.query('SELECT * FOM kasmzcclpa4gw80o.Changes', function(err, rows, fields) {
     console.log('Returning some data...');
     if (err) throw err;
