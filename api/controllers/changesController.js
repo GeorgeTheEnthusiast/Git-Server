@@ -25,7 +25,7 @@ exports.send = function(req, res) {
 
   req.body.GitChanges.forEach(x => {
 
-    transmission.content.html += `<br/>- ${x.FileName}, ChangeType: `;
+    transmission.content.html += `<br/>- [${x.FileName}], Path: [${x.Path}], ChangeType: [`;
     var changeType = '';
 
     switch(x.ChangeType){
@@ -43,7 +43,7 @@ exports.send = function(req, res) {
         break;
     };
 
-    transmission.content.html += changeType;
+    transmission.content.html += changeType + ']';
 
     if (changeType == 'Delete'){
         return;
