@@ -1,0 +1,4 @@
+class gitChangeRequest{
+    gitChanges;
+    localRepositoryName;
+}
