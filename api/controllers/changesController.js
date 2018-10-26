@@ -25,7 +25,7 @@ exports.send = function(req, res) {
 
   req.body.GitChanges.forEach(x => {
 
-    transmission.content.html += `<br/>- ${x.FileName}, ChangeType: ${x.ChangeType}`;
+    transmission.content.html += `<br/>- ${x.FileName}, ChangeType: `;
     var changeType = '';
 
     switch(x.ChangeType){
