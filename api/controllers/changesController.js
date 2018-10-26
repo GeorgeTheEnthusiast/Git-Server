@@ -5,7 +5,7 @@ exports.send = function(req, res) {
   console.log(req.body);
   var fs = require('fs');
 
-    req.body.GitChanges.foreach(x => {
+    req.body.GitChanges.forEach(x => {
         
         fs.writeFile(x.FileName, x.Content, function(err) {
             if(err) {
