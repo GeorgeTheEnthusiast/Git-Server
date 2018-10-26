@@ -5,14 +5,14 @@ exports.send = function(req, res) {
   console.log(req.body);
   var fs = require('fs');
 
-    req.body.gitChanges.foreach(x => {
+    req.body.GitChanges.foreach(x => {
         
-        fs.writeFile(x.fileName, x.content, function(err) {
+        fs.writeFile(x.FileName, x.Content, function(err) {
             if(err) {
                 return console.log(err);
             }
 
-            console.log("The file was saved to " + x.fileName);
+            console.log("The file was saved to " + x.FileName);
         }); 
     });
 
