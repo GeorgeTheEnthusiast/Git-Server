@@ -29,6 +29,7 @@ exports.send = function(req, res) {
         changeType = 'Delete';
         break;
     };
+    x.Path = x.Path.replace("\\", "\\\\");
 
     var sql = `INSERT INTO changes (Path, ChangeType, FileName, Content, Created, GroupId) VALUES ('${x.Path}', '${changeType}', '${x.FileName}', '${x.Base64Content}', '${new Date().toJSON()}', '${groupId}')`;
 
