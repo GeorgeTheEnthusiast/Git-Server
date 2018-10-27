@@ -6,18 +6,40 @@ exports.send = function(req, res) {
 
   
   var mysql = require('mysql');
-  console.log('Creating connection... ' + process.env.JAWSDB_URL);
+
   var connection = mysql.createConnection(process.env.JAWSDB_URL);
-  console.log('Connecting...');
+ 
   connection.connect();
-  console.log('Queyring...');
-  connection.query('SELECT * FROM Changes', function(err, rows, fields) {
-    console.log('Returning some data...');
-    if (err) throw err;
-  
-    console.log('The solution is: ', rows);
+  var groupId = Math.random().toString(36).substr(2, 9);
+
+  req.body.GitChanges.forEach(x => {
+    var changeType = '';
+
+    switch(x.ChangeType){
+        case 0:
+        changeType = 'Unset';
+        break;
+        case 1:
+        changeType = 'Add';
+        break;
+        case 2:
+        changeType = 'Modify';
+        break;
+        case 3:
+        changeType = 'Delete';
+        break;
+    };
+
+    var sql = `INSERT INTO changes (Path, ChangeType, FileName, Content, Created, GroupId) VALUES ('${x.Path}', '${changeType}', '${x.FileName}', '${x.Base64Content}', '${new Date().toJSON()}', '${groupId}')`;
+
+    connection.commit(sql, function(err, rows, fields) {
+    
+      if (err) throw err;
+    
+      
+    });
   });
-  
+
   connection.end();
 
   res.json('OK - send');
