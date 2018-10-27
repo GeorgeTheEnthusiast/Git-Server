@@ -2,8 +2,6 @@
 
 exports.send = function(req, res) {
   console.log('SEND');
-  console.log(req.body);
-
   
   var mysql = require('mysql');
 
@@ -30,8 +28,10 @@ exports.send = function(req, res) {
         break;
     };
     console.log(x.Path);
-    x.Path = x.Path.replace("\\", "\\\\");
+    x.Path = x.Path.replace(/\\/g, "\\\\");
     console.log(x.Path);
+
+    console.log(`Inserting ${x.FileName}...`);
 
     var sql = `INSERT INTO changes (Path, ChangeType, FileName, Content, Created, GroupId) VALUES ('${x.Path}', '${changeType}', '${x.FileName}', '${x.Base64Content}', '${new Date().toJSON()}', '${groupId}')`;
 
@@ -50,9 +50,6 @@ exports.send = function(req, res) {
 
 exports.get = function(req, res) {
     console.log('GET');
-    console.log(req.body);
-
     
-
     res.json('OK - get');
 };
