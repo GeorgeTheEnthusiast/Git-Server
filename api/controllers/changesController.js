@@ -11,7 +11,7 @@ exports.send = function(req, res) {
   console.log('Connecting...');
   connection.connect();
   console.log('Queyring...');
-  connection.query('SELECT * FOM kasmzcclpa4gw80o.Changes', function(err, rows, fields) {
+  connection.query('SELECT * FROM kasmzcclpa4gw80o.Changes', function(err, rows, fields) {
     console.log('Returning some data...');
     if (err) throw err;
   
