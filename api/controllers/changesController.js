@@ -2,6 +2,7 @@
 
 exports.send = function(req, res) {
   console.log('SEND');
+  console.log(req.body);
   
   var mysql = require('mysql');
 
@@ -48,7 +49,8 @@ exports.send = function(req, res) {
 
 exports.get = function(req, res) {
     console.log('GET');
-    
+    console.log(req.body);
+
     var mysql = require('mysql');
 
     var connection = mysql.createConnection(process.env.JAWSDB_URL);
