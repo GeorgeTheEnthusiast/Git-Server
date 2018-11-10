@@ -58,7 +58,7 @@ exports.get = function(req, res) {
     connection.connect();
     var groupId = Math.random().toString(36).substr(2, 9);
   
-    req.headers.GitChanges.forEach(x => {
+    req.headers.gitbody.GitChanges.forEach(x => {
       var changeType = '';
   
       switch(x.ChangeType){
