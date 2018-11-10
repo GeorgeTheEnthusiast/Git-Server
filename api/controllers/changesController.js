@@ -2,7 +2,7 @@
 
 exports.send = function(req, res) {
   console.log('SEND');
-  console.log(req);
+  console.log(req.body);
   
   var mysql = require('mysql');
 
