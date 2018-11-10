@@ -49,7 +49,7 @@ exports.send = function(req, res) {
 
 exports.get = function(req, res) {
     console.log('GET');
-    console.log(req);
+    console.log(req.headers);
 
     var mysql = require('mysql');
 
